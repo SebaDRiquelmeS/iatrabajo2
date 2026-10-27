@@ -21,8 +21,6 @@ sensibilidad de la clase fraude, la precisión se usa solo para desempatar.
 - pandas 3.1.0
 - scikit-learn 1.9.1
 - imbalanced-learn 0.14.2
-## Base de datos 
-- https://www.kaggle.com/datasets/mlg-ulb/creditcardfraud
 ```
 python -m pip install -r requirements.txt
 ```
@@ -31,6 +29,8 @@ python -m pip install -r requirements.txt
 
 Descargar `creditcard.csv` (Credit Card Fraud Detection, Kaggle) y dejarlo en la misma
 carpeta que `main.py`. El dataset no se incluye en la entrega.
+- https://www.kaggle.com/datasets/mlg-ulb/creditcardfraud
+
 
 ## Ejecución
 
