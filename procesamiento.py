@@ -5,10 +5,9 @@ from sklearn.model_selection import train_test_split
 
 
 def cargar_y_preprocesar(ruta_archivo='creditcard.csv', n_muestras=None):
-    # 1. Cargar el conjunto de datos
     df = pd.read_csv(ruta_archivo)
 
-    # 2. Exploración solicitada en la pauta
+    #Exploración solicitada en la pauta
     n_duplicados = df.duplicated().sum()  # se calcula una sola vez (es costoso en 284k filas)
     print("--- EXPLORACIÓN INICIAL ---")
     print(f"Registros totales: {df.shape[0]}, Características: {df.shape[1]}")
@@ -34,11 +33,11 @@ def cargar_y_preprocesar(ruta_archivo='creditcard.csv', n_muestras=None):
     print(f"Transacciones fraudulentas (1): {fraudes} ({fraudes/len(df)*100:.3f}%)")
     print("---------------------------\n")
 
-    # 3. Separar variables predictoras de la variable objetivo
+    # Separar variables predictoras de la variable objetivo
     X = df.drop(columns=['Class'])
     y = df['Class']
 
-    # 4. Dividir en entrenamiento (70%) y prueba (30%) de forma estratificada
+    # Dividir en entrenamiento (70%) y prueba (30%) de forma estratificada
     # El parámetro stratify=y garantiza que el 30% de prueba conserve la misma proporción real de fraudes
     X_train, X_test, y_train, y_test = train_test_split(
         X, y, test_size=0.30, stratify=y, random_state=42

@@ -64,7 +64,7 @@ def definir_modelos():
 
 
 def elegir_mejor_configuracion(cv_results):
-    # 6. Criterio de selección: mayor sensibilidad media (fraude).
+    #Criterio de selección: mayor sensibilidad media (fraude).
     #    En caso de empate, mayor precisión media (fraude).
     sensibilidad = np.round(cv_results['mean_test_sensibilidad'], 6)
     precision = np.round(cv_results['mean_test_precision'], 6)
@@ -75,7 +75,7 @@ def elegir_mejor_configuracion(cv_results):
 
 
 def ejecutar_experimentos(X_train, y_train):
-    # 6. Métrica prioritaria: sensibilidad de la clase 1 (fraudes). La precisión solo sirve para desempatar.
+    # Métrica prioritaria: sensibilidad de la clase 1 (fraudes). La precisión solo sirve para desempatar.
     scorer = {
         'sensibilidad': make_scorer(recall_score, pos_label=1),
         'precision': make_scorer(precision_score, pos_label=1, zero_division=0),
@@ -85,13 +85,13 @@ def ejecutar_experimentos(X_train, y_train):
         'fnr': make_scorer(tasa_falsos_negativos),
     }
 
-    # 2. Validación cruzada estratificada de 5 particiones (las mismas para todos los modelos)
+    # Validación cruzada estratificada de 5 particiones (las mismas para todos los modelos)
     cv_strat = StratifiedKFold(n_splits=5, shuffle=True, random_state=42)
 
     modelos = definir_modelos()
     modelos_entrenados = {}
 
-    # 1. Entrenar los 4 clasificadores con y sin compensación del desbalance (8 experimentos)
+    # ntrenar los 4 clasificadores con y sin compensación del desbalance (8 experimentos)
     for nombre, config in modelos.items():
         for balancear in [False, True]:
             nombre_exp = f"{nombre}_{'Balanceado' if balancear else 'Original'}"
@@ -124,7 +124,7 @@ def ejecutar_experimentos(X_train, y_train):
 
             grid.fit(X_train, y_train)
 
-            # 7. Registrar hiperparámetros y métricas medias/desviaciones en CV
+            #Registrar hiperparámetros y métricas medias/desviaciones en CV
             resultados = grid.cv_results_
             mejor = grid.best_index_
             print(f"Mejores hiperparámetros: {grid.best_params_}")
